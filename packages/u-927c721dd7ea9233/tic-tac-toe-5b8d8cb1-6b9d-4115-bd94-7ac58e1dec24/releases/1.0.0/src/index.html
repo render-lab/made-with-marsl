@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Tic-tac-toe drawn into snow, sand, a steamy window, a chalkboard and frost — built with Three.js." />
+    <meta name="theme-color" content="#14161c" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>" />
+    <title>Surface Tic-Tac-Toe</title>
+  </head>
+  <body>
+    <div id="stage" class="stage"></div>
+
+    <header class="hud hud-top">
+      <h1 class="title">Surface <span>Tic-Tac-Toe</span></h1>
+      <p id="status" class="status" aria-hidden="true">Loading…</p>
+      <dl class="score" aria-label="Score">
+        <div><dt>X</dt><dd id="score-x">0</dd></div>
+        <div><dt>Draws</dt><dd id="score-d">0</dd></div>
+        <div><dt>O</dt><dd id="score-o">0</dd></div>
+      </dl>
+    </header>
+
+    <!-- Keyboard / screen-reader board. Arrow keys move, Enter or Space plays. -->
+    <div id="cells" class="cells" role="grid" aria-label="Board. Use arrow keys to move and Enter to play."></div>
+
+    <section class="hud hud-bottom" aria-label="Game settings">
+      <div class="surfaces" role="group" aria-label="Surface" id="surfaces"></div>
+      <div class="controls">
+        <label class="field">
+          <span>Mode</span>
+          <select id="mode">
+            <option value="pvp">2 players</option>
+            <option value="easy" selected>vs CPU · easy</option>
+            <option value="hard">vs CPU · hard</option>
+          </select>
+        </label>
+        <label class="field" id="side-field">
+          <span>Play as</span>
+          <select id="side">
+            <option value="X" selected>X (first)</option>
+            <option value="O">O</option>
+          </select>
+        </label>
+        <label class="toggle">
+          <input id="assisted" type="checkbox" />
+          <span>Assisted (tap to place)</span>
+        </label>
+        <label class="toggle">
+          <input id="sway" type="checkbox" checked />
+          <span>Camera sway</span>
+        </label>
+        <button id="new-game" class="primary" type="button">New game</button>
+      </div>
+    </section>
+
+    <p id="hint" class="hint" role="note">Draw an X or O in a square</p>
+
+    <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <noscript><p class="fallback">This game needs JavaScript and WebGL.</p></noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

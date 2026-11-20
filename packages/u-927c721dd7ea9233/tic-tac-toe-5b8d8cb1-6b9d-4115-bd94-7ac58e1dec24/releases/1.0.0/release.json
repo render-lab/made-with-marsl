@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "24068a5a-90f5-4682-bef8-74ba0fc1f713",
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "image": "ghcr.io/render-lab/marsl-tic-tac-toe-5b8d8cb1-6b9d-4115-bd94-7ac58e1dec24:1.0.0",
+  "path": "packages/u-927c721dd7ea9233/tic-tac-toe-5b8d8cb1-6b9d-4115-bd94-7ac58e1dec24/releases/1.0.0",
+  "sourceHash": "549bc0dddad3221cccbf2fd0f4f381b2cb4384cc44bfaae53321f26be3e5e2ed",
+  "author": "Raphael Terrier",
+  "source": [
+    {
+      "path": ".dockerignore",
+      "executable": false,
+      "sha": "f4c0724428c359c1bad221755fe5de840d41d2a0ef30ef0da6eefafda6209266"
+    },
+    {
+      "path": ".gitignore",
+      "executable": false,
+      "sha": "51b683467baace87247effed923b8aaecc559168ba0efbb43fd4714a8dc19362"
+    },
+    {
+      "path": "Dockerfile",
+      "executable": false,
+      "sha": "8f3d548d476366c1696bee9eccccea87af43141a1049896c691d8cc42cfe7fa3"
+    },
+    {
+      "path": "HOWTO.md",
+      "executable": false,
+      "sha": "985352173a0c0fff8bc34f6c44c9dffd44bf1e23118f22bdf23b4bbcedf02c41"
+    },
+    {
+      "path": "LICENSE",
+      "executable": false,
+      "sha": "63fde0048b400eb9ce06e8ccef45a831d15d3c1730c88753f566a2a8bb95efa9"
+    },
+    {
+      "path": "README.md",
+      "executable": false,
+      "sha": "1ba945c9c9542b875ccb87b991cdea57aca6b07369a7491450d25521973bbbaa"
+    },
+    {
+      "path": "index.html",
+      "executable": false,
+      "sha": "7eb48d5dc063b716bb378b2f4b0d09c15d2609063c14892d70dda414efc21dbe"
+    },
+    {
+      "path": "marsl.preview.json",
+      "executable": false,
+      "sha": "4483b3b3db686a7f31e5bd34e3cec89ce20aa8b894a559bbb22b0b034f44d58f"
+    },
+    {
+      "path": "package-lock.json",
+      "executable": false,
+      "sha": "94c86738daded4af3d52aa73fb23daad9ef6effead9b97291d56e8e0ad9db043"
+    },
+    {
+      "path": "package.json",
+      "executable": false,
+      "sha": "0594bcf3d954d2d363051629ccf32c16291642ffcdde2f7aa65200bfbc8e84b1"
+    },
+    {
+      "path": "render.yaml",
+      "executable": false,
+      "sha": "63899964ce543fc1da4fc4ac92b8e75a5f6080957961df9cede16431e2ec0dd9"
+    },
+    {
+      "path": "tsconfig.json",
+      "executable": false,
+      "sha": "15af2242b0a677a9d598b75c5fe814667016248841c83f22c736046547d4a2ef"
+    },
+    {
+      "path": "vite.config.ts",
+      "executable": false,
+      "sha": "acc40f7d8b42ce8b7e8cf385a12e4a1561ee96bd6becf519f51d5b9aca877662"
+    },
+    {
+      "path": "docker/nginx.conf.template",
+      "executable": false,
+      "sha": "2e312149955ab72b79acf378b57eb95f1f16a333fe24347729afbedb0dae17a3"
+    },
+    {
+      "path": "docs/images/chalkboard-winning-line.jpg",
+      "executable": false,
+      "sha": "bb72e4bf2b0af41b3b7fe187de6747407f7f61a9720852f72a22d28a6c121537"
+    },
+    {
+      "path": "docs/images/frost-mobile-game.jpg",
+      "executable": false,
+      "sha": "0e358f5b75c4a575d5cdc0f9b655dae740e2481710e3b6c195526989d88e074a"
+    },
+    {
+      "path": "docs/images/sand-rejected-scribble.jpg",
+      "executable": false,
+      "sha": "50234281bf865787b659c35f1203a678afab6e37ead5d6b373e52fd4b83c396a"
+    },
+    {
+      "path": "docs/images/snow-game-in-progress.jpg",
+      "executable": false,
+      "sha": "028ef1f8b3c7bbf48c30729bea9281415d5e3e70427818c71705b5e3b3c77e82"
+    },
+    {
+      "path": "docs/images/steamy-window-draw-result.jpg",
+      "executable": false,
+      "sha": "6da4327e1803d7ea84ea9a84c0a7286129a5d97f19d41784dfc9194770ea701d"
+    },
+    {
+      "path": "public/health",
+      "executable": false,
+      "sha": "2689367b205c16ce32ed4200942b8b8b1e262dfc70d9bc9fbc77c49699a4f1df"
+    },
+    {
+      "path": "src/main.ts",
+      "executable": false,
+      "sha": "ad011c9ab3b5fc5108f765694497722fb2809549be4bdfd69164632086fa94cc"
+    },
+    {
+      "path": "src/strokes.ts",
+      "executable": false,
+      "sha": "8b62bd66751efe14f78a1f7f02b3a095ac26be5f2654f0da182b6274155b1a66"
+    },
+    {
+      "path": "src/style.css",
+      "executable": false,
+      "sha": "b175345a8e57a9dfae22f74d33d53fe52cb4a0556cd075535a4130ce9cdbde06"
+    },
+    {
+      "path": "src/app/autoDraw.ts",
+      "executable": false,
+      "sha": "a72fa4808a14fb0e9970988ce48bdce1104fb629f0b3eba7fa4db449c1499d56"
+    },
+    {
+      "path": "src/app/controller.ts",
+      "executable": false,
+      "sha": "91f782f02878dfbf542ac7dbe8f1cbdb4c76ffe40493be7294c26d9db36fe5b9"
+    },
+    {
+      "path": "src/app/drawInput.ts",
+      "executable": false,
+      "sha": "bdb759b4602fc0be5e328622c18aabca2066ebe85129461859877047ab2e8729"
+    },
+    {
+      "path": "src/app/stage.ts",
+      "executable": false,
+      "sha": "eaa0f2c0e50b8149fb73569d0a5468b83e3d84a7ccb655eb483f7921774f56d3"
+    },
+    {
+      "path": "src/game/ai.ts",
+      "executable": false,
+      "sha": "d1745301578f218d343075c5cd74c6e992bea8611b364e102e60b211bedd42d1"
+    },
+    {
+      "path": "src/game/board.ts",
+      "executable": false,
+      "sha": "7be0423051f6c1d97ded7041d3a99cca078757f4668a5e3e46205dcf4243e5b0"
+    },
+    {
+      "path": "src/game/game.test.ts",
+      "executable": false,
+      "sha": "c62027b5a8390f441b72b820cfc7b2e3f1137d63d7482428f366e6ba59efd883"
+    },
+    {
+      "path": "src/game/index.ts",
+      "executable": false,
+      "sha": "67acc1d8e64ed6fd0419ab7622b6903d52691179644466004cfb1d7638157e26"
+    },
+    {
+      "path": "src/gesture/geometry.ts",
+      "executable": false,
+      "sha": "edeece750783f8d471dc0373dbccbaa238b66cce5bc7e4b8769eb339eb42a670"
+    },
+    {
+      "path": "src/gesture/index.ts",
+      "executable": false,
+      "sha": "884f819d7ea576bb3353fe3adb87c3d0bc3b79961f629eef48d659a84ba80b6c"
+    },
+    {
+      "path": "src/gesture/pdollar.ts",
+      "executable": false,
+      "sha": "6ff03f9cc5b1c224062d6c84bbff97821c3d5ece779905572689c77a8d781b79"
+    },
+    {
+      "path": "src/gesture/recognize.test.ts",
+      "executable": false,
+      "sha": "86c7f9e08ccfa4742712ad1cbbcfc4374fb403e679dc1e6e9b65acfa42385af5"
+    },
+    {
+      "path": "src/gesture/recognize.ts",
+      "executable": false,
+      "sha": "2d9ed281dc2f94153938dd3104dac4c3847da999f9c297fe136feb50a0cb478b"
+    },
+    {
+      "path": "src/gesture/rules.test.ts",
+      "executable": false,
+      "sha": "9ef9543a2e4dc7f930d9f557579fd4e4e9301910820ca3ee7a71541b1bc84c80"
+    },
+    {
+      "path": "src/gesture/rules.ts",
+      "executable": false,
+      "sha": "3ae5eb38fdd4fcb1cb4586739f98c5b67759a800b7e3f9046011ab411bf5d299"
+    },
+    {
+      "path": "src/render/backdrops.ts",
+      "executable": false,
+      "sha": "2076501616f61aa4b7a6a5535f5ac882e93def7d44d8834f05f07ce4b93b2a7b"
+    },
+    {
+      "path": "src/render/feel.test.ts",
+      "executable": false,
+      "sha": "8e2c20deaf3e9e0e44e43e187362a6068feb668d3ebff5dd7b078e8343c4ed6e"
+    },
+    {
+      "path": "src/render/glsl.ts",
+      "executable": false,
+      "sha": "684533e2bb6cc7c94c1db7d2c07f06f6137d6a06e3eabe4d8f2278b772faa758"
+    },
+    {
+      "path": "src/render/markMap.ts",
+      "executable": false,
+      "sha": "5008efaa66d54ec1339d9fc3e72dfe5286c4b8e970c1f208abe601cb5ccdec52"
+    },
+    {
+      "path": "src/render/particles.ts",
+      "executable": false,
+      "sha": "1a7a41e43a6e1dd782ad6aa16f19a90fb29556403d9e9b8d92d32c9d1b542627"
+    },
+    {
+      "path": "src/surfaces/base.ts",
+      "executable": false,
+      "sha": "ac6b38d4450285e7c66f51447ce4d011d7209bad90b32ffbadb00bc94685c618"
+    },
+    {
+      "path": "src/surfaces/chalkboard.ts",
+      "executable": false,
+      "sha": "d8ecc82dd111aba6f807f101d798a656dd3d3ad2c65d480d11beb9282e25187d"
+    },
+    {
+      "path": "src/surfaces/frost.ts",
+      "executable": false,
+      "sha": "729008f8313955df4dc980de0f6e66bea3d8cb510606fb7b905b13a2a7364851"
+    },
+    {
+      "path": "src/surfaces/glass.ts",
+      "executable": false,
+      "sha": "f3f8bb3e88f1d65be97dc7b4096f942da5d3b50a15d5ce6b8b9e68988aa632a1"
+    },
+    {
+      "path": "src/surfaces/index.ts",
+      "executable": false,
+      "sha": "6c099b867f649ab65a1a6665cbc4391c858847fb2dbc43f439e89778c5f4c72f"
+    },
+    {
+      "path": "src/surfaces/sand.ts",
+      "executable": false,
+      "sha": "ff70eedfc47658ba38a8b2b65cb567eef0855e684ff4c95a84c3a30123c81875"
+    },
+    {
+      "path": "src/surfaces/snow.ts",
+      "executable": false,
+      "sha": "78335caa57a2296708c31d48e856b42a7b58da54d53b0be8c1f28a97eeb8dcc4"
+    },
+    {
+      "path": "src/surfaces/steam.ts",
+      "executable": false,
+      "sha": "cb3f9e7f8491e70a8b67878d46571dcee3ceacf33188671962d770826fcf7ffd"
+    },
+    {
+      "path": "src/surfaces/types.ts",
+      "executable": false,
+      "sha": "e84fde0f337a8f65073f3c137cec964770b6eb5d339cb091a95ab27452a5e6e7"
+    }
+  ]
+}
