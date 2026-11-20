@@ -1,0 +1,15 @@
+{
+  "name": "made-with-marsl",
+  "version": "1.0.0",
+  "description": "Tiny dependency-free Hello MARSL release-verification example.",
+  "license": "MIT",
+  "private": true,
+  "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
