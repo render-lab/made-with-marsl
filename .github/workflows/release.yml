@@ -35,6 +35,7 @@ jobs:
           if [ -n "$RETRY_COMMIT" ]; then
             [[ "$RETRY_COMMIT" =~ ^[a-f0-9]{40}$ ]]
             git merge-base --is-ancestor "$RETRY_COMMIT" "$AFTER"
+            export ALLOW_LEGACY_RELEASES=true
             AFTER="$RETRY_COMMIT"
             BEFORE="$(git rev-parse "$AFTER^")"
             # Keep the current trusted validator but inspect the original release files.
@@ -111,7 +112,7 @@ jobs:
           printf '{}\n' > "$REGISTRY_AUTH_FILE"
           trap 'rm -f "$REGISTRY_AUTH_FILE"' EXIT
           printf '%s' "$GH_TOKEN" | skopeo login --authfile "$REGISTRY_AUTH_FILE" --username "$ACTOR" --password-stdin ghcr.io
-          test "$(gh api "repos/$GH_REPO" --jq .visibility)" = internal
+          test "$(gh api "repos/$GH_REPO" --jq .visibility)" = public
           skopeo inspect oci-archive:/tmp/image/image.tar > /tmp/image-info.json
           jq -e --arg id "$RELEASE_ID" --arg source "$SOURCE_HASH" --arg review "$REVIEW_HASH" '.Labels["dev.marsl.release-id"] == $id and .Labels["dev.marsl.source-digest"] == $source and .Labels["dev.marsl.bundle-digest"] == $review and .Labels["org.opencontainers.image.source"] == "https://github.com/render-lab/made-with-marsl"' /tmp/image-info.json
           PACKAGE="${IMAGE#ghcr.io/render-lab/}"
@@ -119,10 +120,10 @@ jobs:
           TAG="${IMAGE##*:}"
           EXISTS=false
           if gh api "orgs/render-lab/packages/container/$PACKAGE" > /tmp/package.json 2>/tmp/package-error; then
-            jq -e '.visibility == "internal" or .visibility == "private"' /tmp/package.json
+            jq -e '.visibility == "public"' /tmp/package.json
             gh api --paginate "orgs/render-lab/packages/container/$PACKAGE/versions?per_page=100" --jq '.[].metadata.container.tags[]' > /tmp/tags
             if grep -Fxq "$TAG" /tmp/tags; then EXISTS=true; fi
-          elif ! grep -q 'HTTP 404' /tmp/package-error; then
+          else
             cat /tmp/package-error; exit 1
           fi
           # Never overwrite an existing version. A retry reuses its original digest.
@@ -134,12 +135,15 @@ jobs:
             skopeo copy --all --digestfile /tmp/digest oci-archive:/tmp/image/image.tar "docker://$IMAGE"
           fi
           VISIBILITY="$(gh api "orgs/render-lab/packages/container/$PACKAGE" --jq .visibility)"
-          test "$VISIBILITY" = internal || test "$VISIBILITY" = private
+          test "$VISIBILITY" = public
           DIGEST="$(cat /tmp/digest)"
+          # Download every image layer without registry credentials before recording success.
+          skopeo copy --src-no-creds "docker://${IMAGE%:*}@$DIGEST" dir:/tmp/anonymous-image
+          test "$(skopeo inspect --no-creds "docker://${IMAGE%:*}@$DIGEST" --format '{{.Digest}}')" = "$DIGEST"
           jq -n --arg releaseId "$RELEASE_ID" --arg sourceHash "$SOURCE_HASH" --arg reviewHash "$REVIEW_HASH" --arg image "$IMAGE" --arg digest "$DIGEST" '{releaseId:$releaseId,sourceHash:$sourceHash,reviewHash:$reviewHash,image:$image,digest:$digest}' > /tmp/evidence.json
           if gh release view "marsl-$RELEASE_ID" --json body --jq .body > /tmp/old-evidence.json 2>/dev/null; then
             diff <(jq -S . /tmp/old-evidence.json) <(jq -S . /tmp/evidence.json)
           else
             gh release create "marsl-$RELEASE_ID" --target "$COMMIT" --title "$PACKAGE" --notes-file /tmp/evidence.json
           fi
-          printf '### Published image\n\n`%s@%s`\n' "${IMAGE%:*}" "$DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          printf '### Public image: anonymous pull verified\n\n`%s@%s`\n' "${IMAGE%:*}" "$DIGEST" >> "$GITHUB_STEP_SUMMARY"
