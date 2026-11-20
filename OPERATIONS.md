@@ -1,14 +1,18 @@
 # Collection operations
 
-Status: active. The Hello MARSL 1.0.0 release passed hosted submission, publication, authenticated pull and runtime checks on November 20, 2026.
+Status: public publishing implementation prepared; live public acceptance pending. Earlier internal-release evidence is recorded below.
 
 ## Enable publication
 
 A MARSL administrator configures `MARSL_PACKAGES_ENABLED=true` and `MARSL_PACKAGES_GITHUB_TOKEN` on the web and workflow services. The credential must be restricted to this repository, with Contents and Pull requests write and Actions read permissions. It is a platform collection grant, separate from a user's project repository connection. Keep it in the service's secret store and outside all project sandboxes and image builds. A short-lived credential resolver is a future improvement over this static service token.
 
-Deploy the MARSL package-release migration and `publish-package` workflow before enabling the feature. The token must be able to read this repository's internal visibility. Ordinary project ownership authorizes preparation and submission only within the server-assigned project directory.
+Deploy the MARSL package-release migration and `publish-package` workflow before enabling the feature. The token must be able to read this repository's public visibility. Ordinary project ownership authorizes preparation and submission only within the server-assigned project directory.
 
-GitHub Actions needs permission to create GHCR packages and GitHub releases. Container access must remain internal or private. Verify package access after the first release; repository access and package visibility are distinct settings. The workflow refuses a public collection and checks the resulting package remains non-public.
+GitHub Actions needs permission to write GHCR packages and GitHub releases. Run **Initialize public image collection** once to copy the pinned Hello MARSL example into `ghcr.io/render-lab/made-with-marsl:bootstrap`. In GitHub's package settings, make that container package public. Repository visibility does not change existing package visibility. Make the legacy per-project container packages public separately to preserve their addresses.
+
+New releases add distinct project/version tags to the existing public collection package. The release job checks public visibility before upload, verifies immutable identity on retries, and downloads every layer without credentials before writing GitHub release evidence. A missing or non-public destination fails closed. The build job never receives publishing credentials.
+
+Schema 2 manifests declare public visibility, bound into the reviewed bundle hash. MARSL requires explicit public confirmation; old internal reviews must be prepared again using a new version. Schema 1 is accepted only for an explicit historical workflow retry, preserving its original image address and evidence.
 
 The collection's default branch requires one approving review and disallows force pushes and deletion. Administrators retain bypass. The first example was reviewed and merged with that bypass because the submission token acts as the same user. Actions and package creation are enabled.
 

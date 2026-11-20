@@ -17,12 +17,13 @@ function filesUnder(root, directory = root) {
     return [{ path: relative(root, full).replaceAll('\\', '/'), sha: hash(readFileSync(full)), executable: !!(stat.mode & 0o111) }];
   });
 }
-export function validateRelease(directory, root = process.cwd()) {
+export function validateRelease(directory, root = process.cwd(), allowLegacy = false) {
   const match = releasePath.exec(directory);
   if (!match) throw new Error('Invalid release path');
   const base = resolve(root, directory), manifest = JSON.parse(readFileSync(join(base, 'release.json'), 'utf8'));
-  const image = `ghcr.io/render-lab/marsl-${match[1]}:${match[2]}`;
-  if (manifest.schemaVersion !== 1 || manifest.path !== directory || manifest.image !== image || manifest.version !== match[2] || !new RegExp(`^${uuid}$`).test(manifest.releaseId)) throw new Error('Release metadata does not match its destination');
+  const legacy = manifest.schemaVersion === 1 && allowLegacy;
+  const image = legacy ? `ghcr.io/render-lab/marsl-${match[1]}:${match[2]}` : `ghcr.io/render-lab/made-with-marsl:${match[1]}-${match[2]}`;
+  if ((!legacy && (manifest.schemaVersion !== 2 || manifest.visibility !== "public")) || manifest.path !== directory || manifest.image !== image || manifest.version !== match[2] || !new RegExp(`^${uuid}$`).test(manifest.releaseId)) throw new Error('Release metadata does not match its destination');
   const bundle = filesUnder(base);
   const actual = bundle.filter(f => f.path.startsWith('src/') && !f.path.startsWith('src/.marsl-package/')).map(f => ({ ...f, path: f.path.slice(4) }));
   if (!Array.isArray(manifest.source) || identity(actual) !== manifest.sourceHash || identity(manifest.source) !== manifest.sourceHash) throw new Error('Source contents differ from the reviewed version');
@@ -46,7 +47,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   }
   const releases = [...directories].map(directory => {
     if (!added.has(directory + '/release.json')) throw new Error('A new release manifest is required; existing releases are immutable');
-    return validateRelease(directory);
+    return validateRelease(directory, process.cwd(), process.env.ALLOW_LEGACY_RELEASES === 'true');
   });
   if (releases.length > 20) throw new Error('At most 20 releases per push');
   appendFileSync(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify({ include: releases })}\ncount=${releases.length}\n`);

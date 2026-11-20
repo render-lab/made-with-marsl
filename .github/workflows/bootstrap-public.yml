@@ -1,0 +1,31 @@
+name: Initialize public image collection
+on:
+  workflow_dispatch:
+permissions: {}
+jobs:
+  initialize:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-24.04
+    permissions:
+      packages: write
+    steps:
+      - run: sudo apt-get update && sudo apt-get install -y skopeo
+      - name: Copy reviewed example into the shared namespace
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTOR: ${{ github.actor }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export REGISTRY_AUTH_FILE="$(mktemp)"
+          printf '{}\n' > "$REGISTRY_AUTH_FILE"
+          trap 'rm -f "$REGISTRY_AUTH_FILE"' EXIT
+          printf '%s' "$GH_TOKEN" | skopeo login --username "$ACTOR" --password-stdin ghcr.io
+          SOURCE=ghcr.io/render-lab/marsl-hello-marsl-94b8ca71-dad8-41d3-88fa-df4e859b534d@sha256:891980e77564d01b2353f2048407d5f55359374479880691a2378cdf1ad9e461
+          TARGET=ghcr.io/render-lab/made-with-marsl:bootstrap
+          if skopeo inspect "docker://$TARGET" > /tmp/existing.json; then
+            test "$(jq -r .Digest /tmp/existing.json)" = "${SOURCE##*@}"
+          else
+            skopeo copy --all --preserve-digests "docker://$SOURCE" "docker://$TARGET"
+          fi
+          echo 'Set the made-with-marsl container package visibility to Public in GitHub settings, then verify an anonymous pull.' >> "$GITHUB_STEP_SUMMARY"
