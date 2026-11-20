@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "0ed89854-9197-44a0-b78b-f58a4b0cc2f3",
+  "name": "hello-marsl",
+  "version": "1.0.0",
+  "image": "ghcr.io/render-lab/marsl-hello-marsl-94b8ca71-dad8-41d3-88fa-df4e859b534d:1.0.0",
+  "path": "packages/u-927c721dd7ea9233/hello-marsl-94b8ca71-dad8-41d3-88fa-df4e859b534d/releases/1.0.0",
+  "sourceHash": "5349cad14a20dffe5bc15de0c5cbad96d7fc59f7614952de26045c84e780c57d",
+  "author": "Raphael Terrier",
+  "source": [
+    {
+      "path": ".dockerignore",
+      "executable": false,
+      "sha": "d1d76d47a4e1943595ab5ced0847358205939002a3b8182d55174df7b72eaf28"
+    },
+    {
+      "path": ".gitignore",
+      "executable": false,
+      "sha": "16d30e4462189fb14dd611bdb708c510630c576a1f35b9383e89a4352da36c97"
+    },
+    {
+      "path": "Dockerfile",
+      "executable": false,
+      "sha": "2128bffe15aaa0266549f9f25f634ade7e6baaa2a4d2e0b184de76188931184b"
+    },
+    {
+      "path": "HOWTO.md",
+      "executable": false,
+      "sha": "4e4342cab6962f886bb2d3051150816e394bd520c34789d1c21ca9c257fd7d5b"
+    },
+    {
+      "path": "LICENSE",
+      "executable": false,
+      "sha": "2ef9acb8a1a486f952212251aaf0483d443f06a5431517b446084f4a60de6f35"
+    },
+    {
+      "path": "README.md",
+      "executable": false,
+      "sha": "23c4e2481fa07b783dbd8b45648ec32efe17b2478eba3fb71d1e6a11d9c820fc"
+    },
+    {
+      "path": "marsl.preview.json",
+      "executable": false,
+      "sha": "977c6a90412a963f049ae52947c00827f791e6f2568e8b7b271404b7790f055d"
+    },
+    {
+      "path": "package-lock.json",
+      "executable": false,
+      "sha": "ca0499c7bc80b4d2cf8e44df5c764b4bcb6fa23cbc04f885c99925cb53b60871"
+    },
+    {
+      "path": "package.json",
+      "executable": false,
+      "sha": "6093ff35bedfd2b427d96ac5ff765d2e454583dba893f534704576d6c9239876"
+    },
+    {
+      "path": "server.js",
+      "executable": false,
+      "sha": "416e52f8a3c82e40e37a9d6111cb175e75ea6638d283346d6d77f585540906d9"
+    },
+    {
+      "path": "test/server.test.js",
+      "executable": false,
+      "sha": "bdcd284dd08d3166415e55a4f768b93c0c48f2862643307707fe1afac2221154"
+    }
+  ]
+}
