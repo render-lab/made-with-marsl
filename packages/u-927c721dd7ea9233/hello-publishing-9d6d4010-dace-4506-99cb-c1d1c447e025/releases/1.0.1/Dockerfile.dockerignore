@@ -1,0 +1,9 @@
+node_modules
+.git
+*.md
+Dockerfile
+.dockerignore
+docs
+
+!.marsl-package/
+!.marsl-package/**
