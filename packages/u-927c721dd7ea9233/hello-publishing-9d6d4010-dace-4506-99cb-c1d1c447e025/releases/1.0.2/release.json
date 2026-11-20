@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "visibility": "public",
+  "releaseId": "d11c403d-3f55-46aa-8069-ec693fec1fc4",
+  "name": "hello-publishing",
+  "version": "1.0.2",
+  "image": "ghcr.io/render-lab/made-with-marsl:hello-publishing-9d6d4010-dace-4506-99cb-c1d1c447e025-1.0.2",
+  "path": "packages/u-927c721dd7ea9233/hello-publishing-9d6d4010-dace-4506-99cb-c1d1c447e025/releases/1.0.2",
+  "sourceHash": "7aecb89b807e492e136d528d867e538de08ad4d1ede838921f4ec0be05c7c71d",
+  "author": "Raphael Terrier",
+  "source": [
+    {
+      "path": ".dockerignore",
+      "executable": false,
+      "sha": "b9e16059ce8c08badf99e58e6c55b2b3e12fdf3a0ea5071ce931343f39257da3"
+    },
+    {
+      "path": "Dockerfile",
+      "executable": false,
+      "sha": "219be11ee912851c414039c7aca87cb3f42980c042ba2be295f3cdb75133fb46"
+    },
+    {
+      "path": "HOWTO.md",
+      "executable": false,
+      "sha": "50f8700ff81282834c20eb9bf66fd865256f4e197a4eee9db80517db7779714b"
+    },
+    {
+      "path": "LICENSE",
+      "executable": false,
+      "sha": "ac11cadb2d65817cab6d7ab96927182e38577451ff37f60d36b4076c8aca05d5"
+    },
+    {
+      "path": "README.md",
+      "executable": false,
+      "sha": "504f9475265d546460bd157eeffd5b251a8f81206aa55f48e322ab6f563e5c62"
+    },
+    {
+      "path": "marsl.preview.json",
+      "executable": false,
+      "sha": "977c6a90412a963f049ae52947c00827f791e6f2568e8b7b271404b7790f055d"
+    },
+    {
+      "path": "package-lock.json",
+      "executable": false,
+      "sha": "464abeca48dda44a07fea1aacb1949cb55c3cffd1c69a8eafda627c84bfd1792"
+    },
+    {
+      "path": "package.json",
+      "executable": false,
+      "sha": "3ff59b3cdc564382e13f493a9253bcb611f7969d99525fd1051933d41897c11a"
+    },
+    {
+      "path": "server.js",
+      "executable": false,
+      "sha": "2d337dca77f8bccd30c7c058f26b167d4fa488aace82f4602c7c7884fd56632f"
+    },
+    {
+      "path": "docs/images/hello-publishing-after-two-clicks-counter-2.jpg",
+      "executable": false,
+      "sha": "42d6fcea5055f27f92c3064a20f12e7238affc3aed3fbfa18bb5c946533a464e"
+    },
+    {
+      "path": "docs/images/hello-publishing-initial-counter-0.jpg",
+      "executable": false,
+      "sha": "00d303262323642a14d9da4d8a2142b7e43eae35aa33a616d944e49bcebee5a9"
+    }
+  ]
+}
