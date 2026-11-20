@@ -1,0 +1,11 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+projects:
+  - name: surface-tic-tac-toe
+    environments:
+      - name: production
+        services:
+          - type: web
+            name: surface-tic-tac-toe
+            runtime: static
+            buildCommand: npm ci && npm run build
+            staticPublishPath: ./dist
