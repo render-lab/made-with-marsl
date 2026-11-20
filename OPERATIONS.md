@@ -16,7 +16,7 @@ Protect the default branch with required maintainer review. Check organization r
 
 MARSL checkpoints the base commit, package commit, and pull request. A retry reuses the same branch and reconciles an uncertain GitHub response. If someone changes that branch, MARSL refuses to overwrite it.
 
-Rerun a failed release workflow from its original commit. The registry step reuses a matching existing image digest instead of overwriting a version. GitHub release metadata records the source hash, complete bundle hash, image, and digest. MARSL only displays Published when these match its saved review and the PR's merged commit.
+Rerun a failed release workflow from its original commit. If the workflow itself needed a fix, run **Build and release images** manually on the default branch with `release_commit` set to the full original merge SHA. The current trusted validator accepts only commits in default-branch history; build checkout and release evidence stay pinned to that original commit. The registry step reuses a matching existing image digest instead of overwriting a version. GitHub release metadata records the source hash, complete bundle hash, image, and digest. MARSL only displays Published when these match its saved review and the PR's merged commit.
 
 Removing a MARSL project or unsharing its public MARSL page does not remove this repository's source or GHCR images. GitHub retention and deletion are separate maintainer operations.
 

@@ -2,6 +2,12 @@ name: Build and release images
 on:
   push:
     paths: ['packages/**']
+  workflow_dispatch:
+    inputs:
+      release_commit:
+        description: Full SHA of the original merged release commit to retry
+        required: true
+        type: string
 permissions: {}
 jobs:
   plan:
@@ -12,6 +18,7 @@ jobs:
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       count: ${{ steps.plan.outputs.count }}
+      commit: ${{ steps.plan.outputs.commit }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -21,7 +28,20 @@ jobs:
         env:
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
-        run: node scripts/plan.mjs "$BEFORE" "$AFTER"
+          RETRY_COMMIT: ${{ inputs.release_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "$RETRY_COMMIT" ]; then
+            [[ "$RETRY_COMMIT" =~ ^[a-f0-9]{40}$ ]]
+            git merge-base --is-ancestor "$RETRY_COMMIT" "$AFTER"
+            AFTER="$RETRY_COMMIT"
+            BEFORE="$(git rev-parse "$AFTER^")"
+            # Keep the current trusted validator but inspect the original release files.
+            git restore --source="$AFTER" --worktree -- packages/
+          fi
+          node scripts/plan.mjs "$BEFORE" "$AFTER"
+          printf 'commit=%s\n' "$AFTER" >> "$GITHUB_OUTPUT"
   build:
     needs: plan
     if: needs.plan.outputs.count != '0'
@@ -35,6 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ needs.plan.outputs.commit }}
           persist-credentials: false
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
         with:
@@ -81,12 +102,13 @@ jobs:
           RELEASE_ID: ${{ matrix.id }}
           SOURCE_HASH: ${{ matrix.sourceHash }}
           REVIEW_HASH: ${{ matrix.reviewHash }}
-          COMMIT: ${{ github.sha }}
+          COMMIT: ${{ needs.plan.outputs.commit }}
           ACTOR: ${{ github.actor }}
         shell: bash
         run: |
           set -euo pipefail
           export REGISTRY_AUTH_FILE="$(mktemp)"
+          printf '{}\n' > "$REGISTRY_AUTH_FILE"
           trap 'rm -f "$REGISTRY_AUTH_FILE"' EXIT
           printf '%s' "$GH_TOKEN" | skopeo login --authfile "$REGISTRY_AUTH_FILE" --username "$ACTOR" --password-stdin ghcr.io
           test "$(gh api "repos/$GH_REPO" --jq .visibility)" = internal
