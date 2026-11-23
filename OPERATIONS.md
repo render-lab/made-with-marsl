@@ -1,6 +1,6 @@
 # Collection operations
 
-Status: public publishing implementation prepared; live public acceptance pending. Earlier internal-release evidence is recorded below.
+Status: public publishing active and live-verified on November 23, 2026. The three legacy image packages and shared collection package are public. Earlier internal-release evidence is recorded below.
 
 ## Enable publication
 
@@ -9,6 +9,8 @@ A MARSL administrator configures `MARSL_PACKAGES_ENABLED=true` and `MARSL_PACKAG
 Deploy the MARSL package-release migration and `publish-package` workflow before enabling the feature. The token must be able to read this repository's public visibility. Ordinary project ownership authorizes preparation and submission only within the server-assigned project directory.
 
 GitHub Actions needs permission to write GHCR packages and GitHub releases. Run **Initialize public image collection** once to copy the pinned Hello MARSL example into `ghcr.io/render-lab/made-with-marsl:bootstrap`. In GitHub's package settings, make that container package public. Repository visibility does not change existing package visibility. Make the legacy per-project container packages public separately to preserve their addresses.
+
+The organization’s public-package creation permission was enabled temporarily to change these four packages, then restored to disabled. Private package creation and inherited access were retained. Do not leave organization-wide public package creation enabled for normal MARSL releases.
 
 New releases add distinct project/version tags to the existing public collection package. The release job checks public visibility before upload, verifies immutable identity on retries, and downloads every layer without credentials before writing GitHub release evidence. A missing or non-public destination fails closed. The build job never receives publishing credentials.
 
@@ -24,7 +26,15 @@ Rerun a failed release workflow from its original commit. If the workflow itself
 
 Removing a MARSL project or unsharing its public MARSL page does not remove this repository's source or GHCR images. GitHub retention and deletion are separate maintainer operations.
 
-## Live acceptance
+## Public release acceptance, November 23, 2026
+
+[Hello Publishing 1.0.2](https://github.com/render-lab/made-with-marsl/releases/tag/marsl-d11c403d-3f55-46aa-8069-ec693fec1fc4) published after the organization restriction was restored. [Run 45162847133](https://github.com/render-lab/made-with-marsl/actions/runs/45162847133) passed against original merge `d42fd5aed5a346977a539ec803bc00878f542967`. The public image is `ghcr.io/render-lab/made-with-marsl@sha256:7b96cf9bc319aef89eae56e71bc60d1372e4d131d94216f9e3b344094d0a465c`.
+
+Anonymous Docker pulls passed for all three legacy images and this new release. Independent anonymous HTTP downloads verified every manifest, config and layer for those images and the shared bootstrap image. The new image ran as UID 1000 on ports 3000 and 8080; its README, HOWTO, LICENSE and both screenshots matched the reviewed bundle. MARSL showed Published after reload.
+
+For an anonymous Docker check, use a temporary config containing `{"auths":{"ghcr.io":{}}}` with no credential helper. An empty auth map can trigger automatic native helper discovery. The workflow independently uses Skopeo’s `--src-no-creds` to download every layer before recording evidence.
+
+## Earlier internal release acceptance
 
 The synthetic [Hello MARSL example](https://marsl.dev/projects/94b8ca71-dad8-41d3-88fa-df4e859b534d) was submitted through the hosted UI as [PR #1](https://github.com/render-lab/made-with-marsl/pull/1), merged at `cad01076f8a109e4882502ecba605907e8951412`. Its source digest is `5349cad14a20dffe5bc15de0c5cbad96d7fc59f7614952de26045c84e780c57d`; its bundle digest is `56c13aebbdf24cd8a0a3c6e9247be1ba42066d86ae55f08d0c81586d6f3c1c67`.
 
