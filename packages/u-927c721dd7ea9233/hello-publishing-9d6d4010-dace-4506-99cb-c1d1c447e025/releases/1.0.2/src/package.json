@@ -1,0 +1,14 @@
+{
+  "name": "hello-publishing",
+  "version": "1.0.0",
+  "description": "A tiny dependency-free Node.js web app used to demo a publishing flow.",
+  "private": true,
+  "license": "MIT",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
